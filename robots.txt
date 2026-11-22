@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://keywordfinder.github.io/sitemap.xml
+Sitemap: https://keywordfinderhub.github.io/sitemap.xml
+
