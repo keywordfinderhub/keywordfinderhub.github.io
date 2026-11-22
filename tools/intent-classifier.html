@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search Intent Classifier — Keyword Finder</title><meta name="description" content="Classify keyword intent."><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0f1115;color:#e8eaed;line-height:1.65}
+a{color:#8ab4f8}header{background:#171a21;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-bottom:1px solid #2c313a}
+header a{color:#e8eaed;text-decoration:none;margin:0 8px;font-size:14px}header b{font-size:20px;color:#fbbc04}
+.hero{padding:44px 20px 30px;text-align:center;background:linear-gradient(135deg,#171a21,#1f2a44);color:#fff}.hero h1{font-size:clamp(28px,5vw,46px);margin:0 0 10px}.hero p{max-width:720px;margin:0 auto;font-size:17px;color:#bdc1c6}
+.wrap{max-width:1080px;margin:0 auto;padding:20px}.card{background:#1a1d24;border:1px solid #2c313a;border-radius:14px;padding:22px;margin:18px 0}
+input,textarea,select{width:100%;padding:11px;border-radius:9px;border:1px solid #3c4043;background:#202329;color:#e8eaed;font-size:15px;margin:7px 0;font-family:inherit}
+button{background:#fbbc04;color:#202124;border:0;padding:11px 20px;border-radius:9px;font-size:15px;cursor:pointer;font-weight:700;margin:4px 4px 4px 0}
+button.sec{background:#202329;color:#8ab4f8;border:1px solid #8ab4f8}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.tile{background:#1a1d24;border:1px solid #2c313a;border-radius:12px;overflow:hidden;text-decoration:none;color:#e8eaed}
+.tile img,.card img.heroimg{width:100%;height:auto;display:block}.tile .pad{padding:12px}.tile h3{font-size:16px;margin:0 0 6px}.tile p{font-size:13px;color:#9aa0a6;margin:0}
+.note{background:#2b2405;border:1px solid #8a6d00;border-radius:10px;padding:12px;font-size:14px;color:#ffe9a8}
+footer{padding:26px 20px;text-align:center;color:#9aa0a6;font-size:13px}h2{color:#fbbc04}.small{font-size:13px;color:#9aa0a6}
+pre{background:#202329;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap;word-break:break-all}code{word-break:break-all}
+.chip{display:inline-block;background:#2b2f36;border:1px solid #3c4043;border-radius:20px;padding:4px 10px;margin:3px;font-size:13px}
+@media(max-width:640px){.wrap{padding:14px}.card{padding:16px}}</style></head><body>
+<header><b>Keyword Finder</b><nav><a href="../index.html">Home</a><a href="../tools/">Tools</a><a href="../guides/">Guides</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../privacy.html">Privacy</a></nav></header>
+<main class="wrap"><h1>Search Intent Classifier</h1><div class="card"><p>Classify each keyword as informational, commercial, transactional or navigational, based on the words it contains. This is a pattern-based guide, not a measurement of real search behaviour — check the results page for the final answer.</p>
+<label>Keywords (one per line)</label><textarea id="k" rows="8">how to bake sourdough bread
+best bread maker 2026
+buy sourdough starter kit
+youtube login
+bread maker vs oven</textarea>
+<button type="button" onclick="go()">Classify intent</button><div id="out"></div></div>
+<script>function cls(line){var l=line.toLowerCase();
+if(/\b(buy|price|discount|deal|order|cheap|near me|for sale|coupon)\b/.test(l))return ['Transactional','Ready to act or buy.'];
+if(/\b(best|top|review|vs|versus|compare|comparison|alternative|cheapest)\b/.test(l))return ['Commercial','Comparing options before a decision.'];
+if(/\b(login|sign in|official site|website|\.com|app download)\b/.test(l)||/^(facebook|google|youtube|amazon|instagram|twitter|netflix)\b/.test(l))return ['Navigational','Trying to reach a specific site or brand.'];
+return ['Informational','Wants to learn or find an answer.'];}
+function go(){var lines=document.getElementById('k').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);var h='<table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left">Keyword</th><th style="text-align:left">Intent</th><th style="text-align:left">What it means</th></tr>';lines.forEach(function(line){var c=cls(line);h+='<tr><td>'+line+'</td><td><strong>'+c[0]+'</strong></td><td>'+c[1]+'</td></tr>';});document.getElementById('out').innerHTML=h+'</table><p class="small">Pattern-based only. If a keyword matches no pattern it is classed as informational — verify against the actual results page.</p>';}go();</script></main>
+<footer><p>Keyword Finder — Free browser tools and practical guides. <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../disclaimer.html">Disclaimer</a> · <a href="../contact.html">Contact</a></p></footer>
+</body></html>
